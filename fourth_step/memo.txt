@@ -1,0 +1,120 @@
+オーバーライド
+サブクラスでスーパークラスのメソッドを再定義すること
+条件
+・戻り値の型
+・メソッド名
+・引数の型と数
+上記３つが同じでないとオーバーライドできない
+
+this
+自分のオブジェクトの
+
+super
+スーパークラスの変数やメソッドを取得することができる
+
+メリット
+同じコードを書かなくてよい
+引数名を書かなくてよい
+
+コンストラクタの呼び出し
+this(引数)
+super(引数)
+
+class Person {
+    String name;
+    Person() {
+        this("未設定"); //下のPersonのこと
+    }
+    Person(String name) {
+        this.name = name;
+    }
+}
+
+class Student extends Person {
+    int stuNo;
+
+    Student(String name, int stuNo) {
+      super(name);　//　Personクラスの引数が１つのクラスを使用するということ
+        this.stuNo = stuNo;
+    }
+}
+
+thisやsuperはコンストラクタ内の先頭に記述する必要がある
+
+
+
+final　これで最後という意味
+クラス、メンバ変数、メソッドにつけられる修飾子
+final class Student {}
+ => class DemoStudent extends Student => extendsは使えない
+
+ final int BASE_NO = 1000;
+  => BASE_NO = 2000;
+変数ではなく定数となる
+
+final void backup()
+ => サブクラスで再定義ができない
+ 
+
+参照型の型変換
+継承関係にあるクラス同士でオブジェクトの型変換
+スーパー　＝　サブ　自動
+サブ　＝　スーパー　キャスト
+サブはスーパーを引き継いでさらに追加されていて、スーパーよりメモリ容量が大きいから
+
+
+抽象クラス
+2種類の継承
+➀機能追加
+➁共通点のまとめ
+定義している部分は同じだが中の処理分が違う場合のことを抽象クラス
+abstract　void practice()
+abstractを使用することで抽象クラスを定義できる
+実装内容を持たないメソッドを抽象メソッドと呼びabstractをつける
+abstractがついているメソッドが１つでもあるとabstractクラスと呼び定義部分でabstractを先頭につける
+インスタンス可はできないためサブクラスで呼び出して使用する
+サブ　＝　スーパーでキャストした場合はオーバーライドされたメソッドが呼び出される
+
+ポリモーフィズム（多態性）
+抽象クラスによって使用するサブクラスが異なる処理をすることをいう
+
+
+メリット
+効率化できる（自分しかもっていない部分の記載でOK）
+呼び出す側のコードが統一される
+
+
+interface
+定数と抽象メソッドのみ記載できる
+String LANG = "英語";  自動的に public static final String LANG = "英語";となる
+void displayEng(); 自動的に abstract void displayEng(); となる
+
+インターフェースを引き継ぐことを実装と呼ぶ
+class Student extends Class {} 継承
+class Student implements Class {} 実装
+
+抽象クラスで引き継げるのは１つだけ
+インターフェースは複数引き継げる
+
+
+パッケージ　複数のクラスをまとめる
+パッケージ化の宣言
+package パッケージ名
+public class Student{}
+
+パッケージ名のフォルダを作成して、その中に入れる必要がある
+クラス名が変わる
+pack.クラス名
+
+パッケージクラスの利用
+import pack.Student;
+たくさんある場合はimport pack.*  これで全部のパッケージを使用できる
+
+package宣言
+import 宣言
+class 宣言
+上記の宣言順番で宣言する
+
+コンパイルの順番を気にしなくてはいけなくなるため
+気にしなくて良い方法のコマンド
+javac -d . *.java　package宣言があったら勝手にフォルダを作成してくれる
